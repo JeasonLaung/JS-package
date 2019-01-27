@@ -1,6 +1,6 @@
 # 对JS原生的一些封装
 ********************
-## 1.对websocket的类一些
+## 1.对websocket的类一些使用
 ``websocket.js``
 ```javascript
 let ws = new socket({
@@ -58,4 +58,48 @@ ws.onopen((event)=>{
 //更甚至可以直接拿出websocket来用（不推荐）
 ws.ws.send('你好')
 
+```
+## 2.对validate的类一些使用（类似TP5的验证器）😂
+提供的验证类型：
+
+``email``邮箱验证
+``mobile``手机验证
+``ip``ip验证
+``num``只能是数字
+``numAlpha``一定要含有数字和字母
+``numOrAlpha``一定要含有数字或字母
+``require``有值
+``max``最大字符串
+``min``最小字符串
+``len``长度
+``Reg``正则
+``before``在时间之前
+``after``在时间之后
+``between``在时间段之间
+
+```javascript
+//直接创建使用
+new validate({
+  "用户名|require().email()":"1111@qq.com",//真实数据
+  "密码|require().numAlpha()":"1111@qq.com",//真实数据
+}).then(()=>{
+  //验证成功
+  //success code
+}).catch((e)=>{
+  //验证失败
+  //console.log(e)
+})
+
+//创建实例后使用
+var validator = new validate();
+validator.check({
+  "用户名|require().email()":"1111@qq.com",//真实数据
+  "密码|require().numAlpha()":"1111@qq.com",//真实数据
+}).then(()=>{
+  //验证成功
+  //success code
+}).catch((e)=>{
+  //验证失败
+  //console.log(e)
+})
 ```

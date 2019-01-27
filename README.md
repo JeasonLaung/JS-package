@@ -62,20 +62,20 @@ ws.ws.send('你好')
 ## 2.对validate的类一些使用（类似TP5的验证器）😂
 提供的验证类型：
 
-``email``邮箱验证</br>
-``mobile``手机验证</br>
-``ip``ip验证</br>
-``num``只能是数字</br>
-``numAlpha``一定要含有数字和字母</br>
-``numOrAlpha``一定要含有数字或字母</br>
-``require``有值</br>
-``max``最大字符串</br>
-``min``最小字符串</br>
-``len``长度</br>
-``Reg``正则</br>
-``before``在时间之前</br>
-``after``在时间之后</br>
-``between``在时间段之间</br>
+``email``      邮箱验证</br>
+``mobile``     手机验证</br>
+``ip``         ip验证</br>
+``num``        只能是数字</br>
+``numAlpha``   一定要含有数字和字母</br>
+``numOrAlpha`` 一定要含有数字或字母</br>
+``require``    有值</br>
+``max``        最大字符串</br>
+``min``        最小字符串</br>
+``len``        长度</br>
+``Reg``        正则</br>
+``before``     在时间之前</br>
+``after``      在时间之后</br>
+``between``    在时间段之间</br>
 
 ```javascript
 //直接创建使用

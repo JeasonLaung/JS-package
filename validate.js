@@ -10,15 +10,27 @@
  * 仿TP验证器的js验证器类
  *
  */
+
+// ``email``      邮箱验证
+// ``mobile``     手机验证
+// ``ip``         ip验证
+// ``num``        只能是数字
+// ``numAlpha``   一定要含有数字和字母
+// ``numOrAlpha`` 一定要含有数字或字母
+// ``require``    有值
+// ``max``        最大字符串
+// ``min``        最小字符串
+// ``len``        长度
+// ``Reg``        正则
+// ``before``     在时间之前
+// ``after``      在时间之后
+// ``between``    在时间段之间
 class validate{
-	constructor(o=null,msg=null){
-		if(o!==null){
-			check(o,msg)
-		}
+	constructor(){
+		// console.log(123)
 	}
 	//0未运行，1成功,2失败
 	#status = 0
-	//输出结果
 	#res = null
 	/*
 	 * 
@@ -105,6 +117,7 @@ class validate{
 
 	catch(func){
 		if (this.#status === 2) {
+
 			func(this.#res)
 			this.#status = 0
 			this.#res = null
@@ -148,15 +161,19 @@ class validate{
 					res = eval(`(this.re.${re_name}(${re_params})).test(\"${this_data}\")`);
 				}
 
+				console.log(eval(`this.msg.${re_name}`))
+				
+
 				if (res !== true) {
 					//核心输出
+					console.log(res+'1')
 					if (msg !== null) {
+					console.log(res+'2')
 						if(undefined!==msg[name+"|"+re_name]){
 							this.#res = msg[name+"|"+re_name];
-						}else{
-							this.#res = eval(`this.msg.${re_name}(\"${name}\",${re_params})`);
 						}
-
+					}else{
+						this.#res = eval(`this.msg.${re_name}(\"${name}\",${re_params})`);
 					}
 					//失败
 					this.#status = 2
@@ -171,6 +188,6 @@ class validate{
 	}
 }
 
-export default{
+export default {
 	validate
 }

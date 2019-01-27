@@ -82,6 +82,7 @@ ws.ws.send('你好')
 new validate({
   "用户名|require().email()":"1111@qq.com",//真实数据
   "密码|require().numAlpha()":"1111@qq.com",//真实数据
+  "时间|require().before(2018-12-12)":"2019-12-12",//真实数据,传参不用加引号
 }).then(()=>{
   //验证成功
   //success code
@@ -93,13 +94,31 @@ new validate({
 //创建实例后使用
 var validator = new validate();
 validator.check({
-  "用户名|require().email()":"1111@qq.com",//真实数据
-  "密码|require().numAlpha()":"1111@qq.com",//真实数据
+  "用户名|require().email()":this.username,//真实数据
+  "密码|require().numAlpha()":this.password,//真实数据
 }).then(()=>{
   //验证成功
   //success code
 }).catch((e)=>{
   //验证失败
   //console.log(e)
+})
+
+//自定义错误消息
+var validator = new validate();
+validator.check({
+  "用户名|require().email()":this.username,//真实数据
+  "密码|require().numAlpha()":this.password,//真实数据
+},{
+  //当require被挂起时，重置输出错误信息
+  "用户名|require":"讨价还价，你倒是还个价啊，万一成了呢？😂",
+  "用户名|email":"牛逼的很😂"
+}).then(()=>{
+  //验证成功
+  //success code
+}).catch((e)=>{
+  //验证失败
+  //console.log(e)
+  
 })
 ```

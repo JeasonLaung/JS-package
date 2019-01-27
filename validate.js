@@ -11,23 +11,25 @@
  *
  */
 
-// ``email``      邮箱验证
-// ``mobile``     手机验证
-// ``ip``         ip验证
-// ``num``        只能是数字
-// ``numAlpha``   一定要含有数字和字母
-// ``numOrAlpha`` 一定要含有数字或字母
-// ``require``    有值
-// ``max``        最大字符串
-// ``min``        最小字符串
-// ``len``        长度
-// ``Reg``        正则
-// ``before``     在时间之前
-// ``after``      在时间之后
-// ``between``    在时间段之间
+// ``email``      邮箱验证</br>
+// ``mobile``     手机验证</br>
+// ``ip``         ip验证</br>
+// ``num``        只能是数字</br>
+// ``numAlpha``   一定要含有数字和字母</br>
+// ``numOrAlpha`` 一定要含有数字或字母</br>
+// ``require``    有值</br>
+// ``max``        最大字符串</br>
+// ``min``        最小字符串</br>
+// ``len``        长度</br>
+// ``Reg``        正则</br>
+// ``before``     在时间之前</br>
+// ``after``      在时间之后</br>
+// ``between``    在时间段之间</br>
 class validate{
-	constructor(){
-		// console.log(123)
+	constructor(o,msg=null){
+		if (o) {
+			this.check(o,msg)
+		}
 	}
 	//0未运行，1成功,2失败
 	#status = 0
@@ -41,9 +43,10 @@ class validate{
 		email:(n)=>'邮箱地址有误！',
 		mobile:(n)=>'手机号有误！',
 		ip:(n)=> 'ip地址非法！',
-		num:(n)=>'只能为数字',
-		numAlpha:(n)=>'只能存在字母及数字',
-		numOrAlpha:(n)=>'只能存在字母或数字',
+		
+		num:(n)=>`${n}只能为数字`,
+		numAlpha:(n)=>`${n}只能存在字母及数字`,
+		numOrAlpha:(n)=>`${n}只能存在字母或数字`,
 
 		require:(n)=>`${n}不能为空`,
 		max:(n,max)=>`${n}不能超过${max}个字符`,
@@ -65,7 +68,6 @@ class validate{
 			return str
 		},
 		before(setDate,getDate){
-			console.log((new Date(this.parse(setDate))).getTime(),(new Date(this.parse(getDate))).getTime())
 			return (new Date(this.parse(setDate))).getTime() > (new Date(this.parse(getDate))).getTime()
 		},
 		after(setDate,getDate){
@@ -153,7 +155,6 @@ class validate{
 
 				//核心验证
 				if (this.compare[re_name]) {
-					// console.log(re_params,this_data)
 					let params = re_params.split(",");
 					res = this.compare[re_name](...params,this_data)
 					re_params = params.map((v)=>`\"${v}\"`).join(",")
@@ -161,17 +162,12 @@ class validate{
 					res = eval(`(this.re.${re_name}(${re_params})).test(\"${this_data}\")`);
 				}
 
-				console.log(eval(`this.msg.${re_name}`))
 				
 
 				if (res !== true) {
 					//核心输出
-					console.log(res+'1')
-					if (msg !== null) {
-					console.log(res+'2')
-						if(undefined!==msg[name+"|"+re_name]){
-							this.#res = msg[name+"|"+re_name];
-						}
+					if (undefined!==msg[name+"|"+re_name]) {
+						this.#res = msg[name+"|"+re_name];
 					}else{
 						this.#res = eval(`this.msg.${re_name}(\"${name}\",${re_params})`);
 					}
@@ -188,6 +184,6 @@ class validate{
 	}
 }
 
-export default {
+export default{
 	validate
 }
